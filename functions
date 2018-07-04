@@ -1,0 +1,28 @@
+
+"""""""""""""""""""""""""""""""
+Creating a DataFrame + Merging
+"""""""""""""""""""""""""""""""
+
+r_cols = ['Tag 1','Tag','Tag 2']
+var = pd.read_csv('path', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1") #sep stands for separator. \t is tab.
+
+m_cols = ['movie_id', 'title']
+movies = pd.read_csv('path', sep='|', names=m_cols, usecols=range(2), encoding="ISO-8859-1") 
+
+ratings = pd.merge(movies, ratings)
+
+ratings.head()
+
+
+""""""""""""""""""""""""""""""""""""""
+Rearranging the Data & Correlationship
+""""""""""""""""""""""""""""""""""""""
+userRatings = ratings.pivot_table(index=['user_id'],columns=['title'],values='rating')
+userRatings.head() #Shows a matrix where the row is user and columns is the movies each user has watched and the entry is their rating
+
+variable.dropna() #Drops NaN values for variable
+
+var1.corrwith(var2) #Returns correlation value between var1 and var2. var1 can be a dataframe. Returned value would be a matrix.
+mat.corr() #Returns matrix that shows correlation value for every column pair. 
+
+mat.order(ascending = False) # Sort by descending order
