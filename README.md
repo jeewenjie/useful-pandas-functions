@@ -4,6 +4,7 @@ Collection of Pandas functions that are useful
 """""""""""""""""""""""""""""""
 Creating a DataFrame + Merging
 """""""""""""""""""""""""""""""
+
 r_cols = ['Tag 1','Tag','Tag 2']
 var = pd.read_csv('path', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1") #sep stands for separator. \t is tab.
 
