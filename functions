@@ -25,3 +25,10 @@ var1.corrwith(var2) #Returns correlation value between var1 and var2. var1 can b
 mat.corr() #Returns matrix that shows correlation value for every column pair. 
 
 mat.order(ascending = False) # Sort by descending order
+
+
+""""""""""""""""""""""""""""""""""""""
+Counting Frequency of Occurrences
+""""""""""""""""""""""""""""""""""""""
+# Returns a row detailing the number of times each item in "Winning Number 1" occurs
+x = df['Winning Number 1'].value_counts()
