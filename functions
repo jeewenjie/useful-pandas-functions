@@ -40,22 +40,35 @@ df['Winning Numbers'] = df[['Winning Number 1', '2', '3','4','5','6']].values.to
 """"""""""""""""""""""""""""""""""""""
 Excerpt from Chaos Project
 """"""""""""""""""""""""""""""""""""""
+import numpy as np
+import pandas as pd
+import matplotlib as plt
+
 ## Define columns
 r_cols = ['index','date','result','whiteskill','blackskill','num_move','is_there_date','is_there_result','istherewhiteskill','isthereblackskill','isthere_edate','specificsetup','fen','result2','oyrange','badlen']
 
 ## Split the single column into r_cols using ' ' as separator to place them into the respective columns  
-df = pd.read_csv(r'C:\Users\Wen Jie\Desktop\allwithfilteredanotationssince1998.txt',sep=' ',names = r_cols, nrows=50000)
-
+df = pd.read_csv(r'C:\Users\Wen Jie\Desktop\allwithfilteredanotationssince1998.txt',sep=' ',names = r_cols, nrows=50001)
 df = df.drop(df.index[0:5])
+# Resets the index so it counts from 0. Else, due to .drop(), the index starts from 5. 
+df = df.reset_index(drop=True)
 
 
 ## Define a new dataframe that is the same as above, without separating into r_cols
 ## i.e, only have one column named '# #'
 moves = pd.read_csv(r'C:\Users\Wen Jie\Desktop\allwithfilteredanotationssince1998.txt',nrows=50000)
-moves = moves.drop(df.index[0:5]) # Same reason as previous section 
-
+moves = moves.drop(moves.index[0:4]) # Same reason as previous section 
+# Resets the index so it counts from 0. Else, due to .drop(), the index starts from 4. 
+moves = moves.reset_index(drop=True)
 ## Split the column '# #' into 2 columns('# #' and 'moves') after the '###' token. 
 ## str[1] takes everything after the token and place into column 'moves'. 
 ## str[0] takes everything before the token and place into column 'moves'.
 moves['moves'] = moves['# #'].str.split('###').str[1] 
-      
+
+
+# axis = 1 refers to column; 0 to row. 
+# np.split divides the dataframe into 2 dataframe. I'm only taking 1 of the 2.  
+moves = np.split(moves, [1], axis=1)[1]
+
+
+final_df = pd.concat([df, moves], axis=1)
