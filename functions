@@ -35,3 +35,27 @@ x = df['Winning Number 1'].value_counts()
 
 # Combines values from different columns into a list. 'Winning Numbers' is a new column added to the DataFrame
 df['Winning Numbers'] = df[['Winning Number 1', '2', '3','4','5','6']].values.tolist()
+
+
+""""""""""""""""""""""""""""""""""""""
+Excerpt from Chaos Project
+""""""""""""""""""""""""""""""""""""""
+## Define columns
+r_cols = ['index','date','result','whiteskill','blackskill','num_move','is_there_date','is_there_result','istherewhiteskill','isthereblackskill','isthere_edate','specificsetup','fen','result2','oyrange','badlen']
+
+## Split the single column into r_cols using ' ' as separator to place them into the respective columns  
+df = pd.read_csv(r'C:\Users\Wen Jie\Desktop\allwithfilteredanotationssince1998.txt',sep=' ',names = r_cols, nrows=50000)
+
+df = df.drop(df.index[0:5])
+
+
+## Define a new dataframe that is the same as above, without separating into r_cols
+## i.e, only have one column named '# #'
+moves = pd.read_csv(r'C:\Users\Wen Jie\Desktop\allwithfilteredanotationssince1998.txt',nrows=50000)
+moves = moves.drop(df.index[0:5]) # Same reason as previous section 
+
+## Split the column '# #' into 2 columns('# #' and 'moves') after the '###' token. 
+## str[1] takes everything after the token and place into column 'moves'. 
+## str[0] takes everything before the token and place into column 'moves'.
+moves['moves'] = moves['# #'].str.split('###').str[1] 
+      
