@@ -24,6 +24,7 @@ df = df.sample(frac=1).reset_index(drop=True)
 # traintest_cutoff: = 1-traintest_cutoff
 train,test = df[:traintest_cutoff],df[traintest_cutoff:]
 
-# header = False makes it so that it won't write the headers as the first row
-train.to_csv('/home/audiodsp/Desktop/train.csv',header=False,index=False)
-test.to_csv('/home/audiodsp/Desktop/test.csv',header=False,index=False)
+# header = False makes it so that it won't write the headers as the first row.
+# Use header=False if no header is specified. 
+train.to_csv('/home/audiodsp/Desktop/train.csv',header=['file,label'],index=False)
+test.to_csv('/home/audiodsp/Desktop/test.csv',header=['file,label'],index=False)
