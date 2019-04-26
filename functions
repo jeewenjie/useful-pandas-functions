@@ -72,3 +72,7 @@ moves = np.split(moves, [1], axis=1)[1]
 
 
 final_df = pd.concat([df, moves], axis=1)
+
+# Find the mean of rows in column 'azimuth' until rows in column 'active class' changed value
+x = df.groupby((df['active class'] != df['active class'].shift()).cumsum())['azimuth'].mean()
+
